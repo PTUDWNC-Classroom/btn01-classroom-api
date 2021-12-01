@@ -4,8 +4,8 @@ exports.getGradeStruct = async (req, res, next) => {
   console.log("getGradeStruct")
 
   // Nhận classId 
-  // console.log(req.body)
-  const classId = req.body
+  //console.log(req.body)
+  const classId = req.body.classId
 
   // Tìm gradeAssignment của classId
   const result = await gradeAssignmentService.getGradeStructAssignment(classId);

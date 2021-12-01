@@ -21,8 +21,7 @@ function SortByIndexAssignment(data) {
 
 exports.getGradeStructAssignment = async (classId) => {
     // Tìm tất cả GradeAssignment theo classId
-
-    const result = await gradeAssignmentModel.find();
+    const result = await gradeAssignmentModel.find({classId: mongoose.Types.ObjectId(classId)});
 
     console.log(result)
 
@@ -48,6 +47,7 @@ exports.addAssignmentIntoStruct = async (assignment) => {
     }
     // Thêm vào database
     const assignmentInfo = {
+        classId: assignment.classId,
         gradeTitle: assignment.gradeTitle,
         gradeDetail: assignment.gradeDetail,
         disableState: true,
@@ -76,7 +76,10 @@ exports.updateIndexAssignmentIntoStruct = async (assignment) => {
     console.log("updateIndexAssignmentIntoStruct")
 
     // Tìm tất cả assignment theo classId
-    const assignment1 = await gradeAssignmentModel.find()
+    const assignment1 = await gradeAssignmentModel.find(
+        {
+            classId: mongoose.Types.ObjectId(assignment.classId)
+        })
 
     // Sắp xếp assignment vừa tìm được
     const result_sort = SortByIndexAssignment(assignment1);
